@@ -1,0 +1,20 @@
+name: Welcome Message
+on:
+  issues:
+    types: [opened]
+  pull_request:
+    types: [opened]
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome comment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "👋 Thanks for contributing to a Stackaura project! Ahmar Hussain (@RanaAhmar) will review this shortly. In the meantime, feel free to check out our other tools at stackaura.com!"
+            })
